@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全验证 - 仿Booking界面</title>
+    <style>
+        /* 保持与之前页面一致的样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .verification-container {
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        .verification-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .verification-icon {
+            width: 60px;
+            height: 60px;
+            background: #003580;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        h2 {
+            color: #003580;
+            margin-bottom: 0.5rem;
+            font-size: 22px;
+        }
+
+        .verification-description {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .code-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .code-input {
+            width: 45px;
+            height: 55px;
+            text-align: center;
+            font-size: 24px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .code-input:focus {
+            outline: none;
+            border-color: #003580;
+            box-shadow: 0 0 0 3px rgba(0,53,128,0.1);
+        }
+
+        .timer {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .resend-link {
+            color: #003580;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .resend-link.disabled {
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .submit-btn {
+            background: #003580;
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: #002050;
+        }
+        #top-navibar{
+            background-color: #003580;
+            border-radius: 10px;
+            height: 100px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+        }
+        #logoname{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            position: absolute;
+            top: 30px;
+            left: 50px;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        .radius1{
+            border-radius: 20px;
+            position: absolute;
+            right: 200px;
+            top: 30px;
+        }
+        .radius2{
+            border-radius: 20px;
+            position: absolute;
+            right: 120px;
+            top: 30px;
+        }
+        #flag{
+            width: 30px;
+            height: 30px;
+            border-radius: 40px;
+        }
+        #question{
+            width: 30px;
+            height: 30px;
+            border-radius: 40px;
+        }
+    </style>
+</head>
+<body style="background-color: #003580;">
+    <div id="top-navibar">
+        <div class="radius1"><img id="flag" src="../images/国旗.jpg"></div>
+        <div class="radius2"><img id="question" src="../images/疑问.png"></div>
+    </div>
+    <div id="logoname"><a class="hreftext" href="index.html" style="color: white;">YuanLai.com</a></div>
+    <div class="verification-container">
+        <div class="verification-header">
+            <div class="verification-icon">✓</div>
+            <h2>安全验证</h2>
+            <p class="verification-description">
+                我们已向 <span id="email">example@email.com</span> 发送了6位验证码<br>
+                请输入验证码以继续登录
+            </p>
+        </div>
+
+        <form id="verificationForm">
+            <div class="code-inputs">
+                <input type="text" class="code-input" maxlength="1" data-index="1">
+                <input type="text" class="code-input" maxlength="1" data-index="2">
+                <input type="text" class="code-input" maxlength="1" data-index="3">
+                <input type="text" class="code-input" maxlength="1" data-index="4">
+                <input type="text" class="code-input" maxlength="1" data-index="5">
+                <input type="text" class="code-input" maxlength="1" data-index="6">
+            </div>
+
+            <div class="timer">
+                <span id="countdown">59</span>秒后可重新发送
+            </div>
+
+            <div class="error-message" id="errorMsg">验证码错误，请重新输入</div>
+
+            <a href="../网页2/验证.html"><button type="button" class="submit-btn">验证</button></a>
+        </form>
+
+        <p class="resend-link disabled" id="resendLink">
+            未收到验证码？<span onclick="resendCode()">重新发送</span>
+        </p>
+    </div>
+
+    <script>
+
+        const email = document.getElementById('email');
+        email.textContent = localStorage.getItem('loginEmail');
+        // 自动聚焦和输入跳转
+        const inputs = document.querySelectorAll('.code-input');
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1) {
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    } else {
+                        inputs[index].blur();
+                    }
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && e.target.value === '') {
+                    if (index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                }
+            });
+        });
+
+        // 倒计时功能
+        let countdown = 59;
+        const timerElement = document.getElementById('countdown');
+        const resendLink = document.getElementById('resendLink');
+
+        function updateTimer() {
+            timerElement.textContent = countdown;
+            if (countdown <= 0) {
+                resendLink.classList.remove('disabled');
+                clearInterval(timerInterval);
+            } else {
+                countdown--;
+            }
+        }
+
+        let timerInterval = setInterval(updateTimer, 1000);
+
+        // 重新发送验证码
+        function resendCode() {
+            if (!resendLink.classList.contains('disabled')) {
+                countdown = 59;
+                resendLink.classList.add('disabled');
+                timerInterval = setInterval(updateTimer, 1000);
+                // 这里添加实际的重发验证码逻辑
+            }
+        }
+
+        // 表单验证
+        document.getElementById('verificationForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const code = Array.from(inputs).map(input => input.value).join('');
+            
+            if (code.length !== 6 || !/^\d+$/.test(code)) {
+                document.getElementById('errorMsg').style.display = 'block';
+                return;
+            }
+
+            // 模拟验证成功
+            document.getElementById('errorMsg').style.display = 'none';
+            // 这里添加实际的验证逻辑
+            window.location.href = '/success.html';
+        });
+    </script>
+</body>
+</html>

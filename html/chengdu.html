@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>成都民宿 - 元莱.cn</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .header {
+        background-color: #003580;
+      }
+      
+      .districts-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      
+      .district-title {
+        font-size: 24px;
+        color: #0071c2;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #ff9900;
+        text-align: center;
+        font-weight: 700;
+        position: relative;
+      }
+      
+      .district-title::after {
+        content: '';
+        position: absolute;
+        width: 80px;
+        height: 3px;
+        background-color: #ff9900;
+        bottom: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .districts-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      
+      @media (max-width: 768px) {
+        .districts-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .districts-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      
+      .district-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        background: white;
+        position: relative;
+      }
+      
+      .district-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      }
+      
+      .district-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+      
+      .district-content {
+        padding: 15px;
+      }
+      
+      .district-name {
+        font-size: 18px;
+        font-weight: bold;
+        color: #0071c2;
+        margin-bottom: 5px;
+      }
+      
+      .district-count {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+      
+      .district-desc {
+        color: #333;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 15px;
+      }
+      
+      .district-btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background: #ff9900;
+        color: white;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: background-color 0.3s;
+      }
+      
+      .district-btn:hover {
+        background: #ff6600;
+      }
+      
+      .hero-chengdu {
+        background-image: url('https://img.58tujia.com/house/2004/1013/xuanzhuan_5ec4d19c-fd05-4cba-8845-a2c4c98a04a7.jpg');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 80px 20px;
+        text-align: center;
+      }
+      
+      .hero-chengdu h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        color: #ff9900; /* 鲜艳的橙色 */
+        padding: 10px 20px;
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        display: inline-block;
+        font-weight: 700;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        border: 2px solid rgba(255, 153, 0, 0.5);
+      }
+      
+      .hero-chengdu p {
+        font-size: 18px;
+        max-width: 800px;
+        margin: 0 auto 30px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+      }
+      
+      .search-bar {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      }
+      
+      .search-input {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-right: 10px;
+        font-size: 16px;
+      }
+      
+      .search-btn {
+        padding: 10px 20px;
+        background: #ff9900;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      
+      .search-btn:hover {
+        background: #ff6600;
+      }
+      
+      .category-filter {
+        display: flex;
+        justify-content: center;
+        margin: 30px 0;
+        flex-wrap: wrap;
+      }
+      
+      .filter-btn {
+        padding: 8px 16px;
+        margin: 0 8px 8px;
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      
+      .filter-btn.active, .filter-btn:hover {
+        background: #ff9900;
+        color: white;
+        border-color: #ff9900;
+        box-shadow: 0 2px 5px rgba(255, 153, 0, 0.4);
+      }
+      
+      .price-tag {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(255, 153, 0, 0.8);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <div class="logo">
+          <a href="index.html">
+            <img src="../images/logo.png" alt="元莱.cn" class="logo-img" />
+          </a>
+        </div>
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li class="nav-item"><a href="index.html" class="nav-link">首页</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">住宿</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">机票</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">租车</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">景点门票</a></li>
+          </ul>
+        </nav>
+        <div class="user-controls">
+          <div class="language-selector">
+            <span>CNY</span>
+            <i class="fas fa-globe"></i>
+          </div>
+          <div id="userInfo" style="display: none;">
+            <span style="color: white; margin-right: 10px;">欢迎，<span id="userEmail"></span></span>
+            <button id="logoutBtn" style="background: none; border: 1px solid white; color: white; padding: 8px 12px; border-radius: 4px; cursor: pointer;">退出</button>
+          </div>
+          <div id="authButtons">
+            <a href="注册页面.html" class="register-btn">注册</a>
+            <a href="登录页面.html" class="login-btn">登录</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-chengdu">
+        <h1>成都特色民宿</h1>
+        <p>探索天府之国的温馨住宿，感受巴蜀文化的独特魅力</p>
+        <div class="search-bar">
+          <input type="text" class="search-input" placeholder="搜索成都各区域民宿...">
+          <button class="search-btn">搜索</button>
+        </div>
+      </section>
+      
+      <div class="category-filter">
+        <button class="filter-btn active">全部区域</button>
+        <button class="filter-btn">锦江区</button>
+        <button class="filter-btn">武侯区</button>
+        <button class="filter-btn">青羊区</button>
+        <button class="filter-btn">成华区</button>
+        <button class="filter-btn">金牛区</button>
+        <button class="filter-btn">双流区</button>
+        <button class="filter-btn">温江区</button>
+        <button class="filter-btn">郫都区</button>
+        <button class="filter-btn">龙泉驿区</button>
+        <button class="filter-btn">新都区</button>
+        <button class="filter-btn">都江堰市</button>
+      </div>
+
+      <section class="districts-container">
+        <h2 class="district-title">成都热门区域民宿</h2>
+        <div class="districts-grid">
+          <!-- 锦江区 -->
+          <div class="district-card">
+            <div class="price-tag">¥268起</div>
+            <img src="https://img2.baidu.com/it/u=2535811817,3101770787&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500" alt="锦江区" class="district-img">
+            <div class="district-content">
+              <h3 class="district-name">锦江区</h3>
+              <p class="district-count">378家民宿</p>
+              <p class="district-desc">春熙路、太古里、IFS国际金融中心等繁华商圈，购物、美食集中地。</p>
+              <a href="#" class="district-btn">查看民宿</a>
+            </div>
+          </div>
+          
+          <!-- 武侯区 -->
+          <div class="district-card">
+            <div class="price-tag">¥198起</div>
+            <img src="https://img0.baidu.com/it/u=2122360106,1203575264&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=667" alt="武侯区" class="district-img">
+            <div class="district-content">
+              <h3 class="district-name">武侯区</h3>
+              <p class="district-count">426家民宿</p>
+              <p class="district-desc">拥有武侯祠、锦里古街、兰桂坊等著名景点，文化底蕴深厚。</p>
+              <a href="#" class="district-btn">查看民宿</a>
+            </div>
+          </div>
+          
+          <!-- 青羊区 -->
+          <div class="district-card">
+            <div class="price-tag">¥228起</div>
+            <img src="https://img0.baidu.com/it/u=3318285651,384188857&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=667" alt="青羊区" class="district-img">
+            <div class="district-content">
+              <h3 class="district-name">青羊区</h3>
+              <p class="district-count">312家民宿</p>
+              <p class="district-desc">宽窄巷子、四川博物馆、人民公园，体验老成都风情。</p>
+              <a href="#" class="district-btn">查看民宿</a>
+            </div>
+          </div>
+          
+          <!-- 成华区 -->
+          <div class="district-card">
+            <div class="price-tag">¥188起</div>
+            <img src="https://img0.baidu.com/it/u=1765914635,773967406&fm=253&fmt=auto&app=120&f=JPEG?w=611&h=394" alt="成华区" class="district-img">
+            <div class="district-content">
+              <h3 class="district-name">成华区</h3>
+              <p class="district-count">256家民宿</p>
+              <p class="district-desc">成都东郊记忆、成都大熊猫繁育研究基地所在地。</p>
+              <a href="#" class="district-btn">查看民宿</a>
+            </div>
+          </div>
+          
+          <!-- 金牛区 -->
+          <div class="district-card">
+            <div class="price-tag">¥176起</div>
+            <img src="https://img0.baidu.com/it/u=3365991612,4283451034&fm=253&fmt=auto&app=138&f=JPEG?w=754&h=500" alt="金牛区" class="district-img">
+            <div class="district-content">
+              <h3 class="district-name">金牛区</h3>
+              <p class="district-count">198家民宿</p>
+              <p class="district-desc">北站商圈，交通便利，北湖公园风景秀丽。</p>
+              <a href="#" class="district-btn">查看民宿</a>
+            </div>
+          </div>
+          
+          <!-- 双流区 -->
+          <div class="district-card">
+            <div class="price-tag">¥168起</div>
+            <img src="https://img1.baidu.com/it/u=117437653,3620750188&fm=253&fmt=auto&app=120&f=JPEG?w=891&h=500" alt="双流区" class="district-img">
+            <div class="district-content">
+              <h3 class="district-name">双流区</h3>
+              <p class="district-count">165家民宿</p>
+              <p class="district-desc">成都双流国际机场所在地，交通便捷，适合中转住宿。</p>
+              <a href="#" class="district-btn">查看民宿</a>
+            </div>
+          </div>
+          
+          <!-- 郫都区 -->
+          <div class="district-card">
+            <div class="price-tag">¥158起</div>
+            <img src="https://img0.baidu.com/it/u=1953534797,2181003319&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500" alt="郫都区" class="district-img">
+            <div class="district-content">
+              <h3 class="district-name">郫都区</h3>
+              <p class="district-count">142家民宿</p>
+              <p class="district-desc">川菜文化体验区，古镇安德，享受乡村休闲时光。</p>
+              <a href="#" class="district-btn">查看民宿</a>
+            </div>
+          </div>
+          
+          <!-- 都江堰市 -->
+          <div class="district-card">
+            <div class="price-tag">¥238起</div>
+            <img src="https://img1.baidu.com/it/u=2173726069,247492381&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=652" alt="都江堰市" class="district-img">
+            <div class="district-content">
+              <h3 class="district-name">都江堰市</h3>
+              <p class="district-count">289家民宿</p>
+              <p class="district-desc">世界文化遗产都江堰水利工程，青城山道教名山，自然风光秀丽。</p>
+              <a href="#" class="district-btn">查看民宿</a>
+            </div>
+          </div>
+          
+          <!-- 温江区 -->
+          <div class="district-card">
+            <div class="price-tag">¥148起</div>
+            <img src="https://img1.baidu.com/it/u=3970745681,1590293389&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500" alt="温江区" class="district-img">
+            <div class="district-content">
+              <h3 class="district-name">温江区</h3>
+              <p class="district-count">118家民宿</p>
+              <p class="district-desc">万春温泉度假区，西部医学中心，城市生态区。</p>
+              <a href="#" class="district-btn">查看民宿</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="newsletter">
+            <h3 class="newsletter-title">立即订阅，获取独家优惠</h3>
+            <form action="#" class="newsletter-form">
+              <input type="email" placeholder="输入您的电子邮箱" required />
+              <button type="submit" class="newsletter-btn">订阅</button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4 class="footer-heading">客户服务</h4>
+            <ul class="footer-list">
+              <li><a href="#">帮助中心</a></li>
+              <li><a href="#">常见问题</a></li>
+              <li><a href="#">联系我们</a></li>
+              <li><a href="#">合作伙伴帮助</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4 class="footer-heading">关于我们</h4>
+            <ul class="footer-list">
+              <li><a href="#">关于 元莱.cn</a></li>
+              <li><a href="#">用户协议</a></li>
+              <li><a href="#">隐私政策</a></li>
+              <li><a href="#">企业信息</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4 class="footer-heading">目的地</h4>
+            <ul class="footer-list">
+              <li><a href="#">国家</a></li>
+              <li><a href="#">城市</a></li>
+              <li><a href="#">地区</a></li>
+              <li><a href="#">机场</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4 class="footer-heading">合作伙伴</h4>
+            <ul class="footer-list">
+              <li><a href="#">加盟 元莱.cn</a></li>
+              <li><a href="#">营销推广</a></li>
+              <li><a href="#">旅游代理</a></li>
+              <li><a href="#">酒店管理系统</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p class="copyright">© 1996–2025 yuAnlaI.com™. 版权所有</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-weibo"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // 检查用户是否已登录
+      document.addEventListener('DOMContentLoaded', function() {
+        const loginEmail = localStorage.getItem('loginEmail');
+        const userInfo = document.getElementById('userInfo');
+        const authButtons = document.getElementById('authButtons');
+        const userEmail = document.getElementById('userEmail');
+        const logoutBtn = document.getElementById('logoutBtn');
+        
+        if (loginEmail) {
+          // 显示用户信息
+          userInfo.style.display = 'block';
+          authButtons.style.display = 'none';
+          userEmail.textContent = loginEmail;
+          
+          // 添加退出登录功能
+          logoutBtn.addEventListener('click', function() {
+            localStorage.removeItem('loginEmail');
+            userInfo.style.display = 'none';
+            authButtons.style.display = 'block';
+          });
+        } else {
+          // 显示登录/注册按钮
+          userInfo.style.display = 'none';
+          authButtons.style.display = 'block';
+        }
+        
+        // 筛选按钮交互
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 移除所有按钮的active类
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // 为当前点击的按钮添加active类
+                this.classList.add('active');
+                
+                // 这里可以添加实际筛选逻辑
+                const district = this.textContent;
+                console.log('筛选区域:', district);
+                // 实际应用中，这里可以根据区域筛选民宿卡片
+            });
+        });
+      });
+    </script>
+    <!-- Floating Chat Window -->
+    <div
+      id="floating-chat"
+      style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 25%;
+        min-width: 200px;
+        max-width: 400px;
+        height: 44%;
+        min-height: 300px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transform-origin: bottom right;
+      "
+    >
+      <div
+        id="chat-header"
+        style="
+          background: #0071c2;
+          color: white;
+          padding: 10px 15px;
+          font-weight: bold;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: move;
+          user-select: none;
+          -webkit-user-select: none;
+          border-radius: 10px 10px 0 0;
+        "
+      >
+        <span>AI客服</span>
+        <div style="display: flex; align-items: center;">
+          <button
+            id="minimize-chat"
+            style="
+              background: none;
+              border: none;
+              color: white;
+              font-size: 18px;
+              margin-right: 10px;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 24px;
+              height: 24px;
+              border-radius: 50%;
+              transition: background-color 0.2s;
+            "
+            title="最小化"
+            onmouseover="this.style.backgroundColor='rgba(255,255,255,0.2)'"
+            onmouseout="this.style.backgroundColor='transparent'"
+          >
+            <i class="fas fa-minus"></i>
+          </button>
+          <button
+            id="close-chat"
+            style="
+              background: none;
+              border: none;
+              color: white;
+              font-size: 18px;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 24px;
+              height: 24px;
+              border-radius: 50%;
+              transition: background-color 0.2s;
+            "
+            title="关闭"
+            onmouseover="this.style.backgroundColor='rgba(255,255,255,0.2)'"
+            onmouseout="this.style.backgroundColor='transparent'"
+          >
+            
+          </button>
+        </div>
+      </div>
+      <div id="chat-loading" style="flex: 1; display: flex; justify-content: center; align-items: center; flex-direction: column; background: #f5f9ff;">
+        <div style="width: 40px; height: 40px; border: 3px solid #eee; border-top: 3px solid #0071c2; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        <p style="margin-top: 15px; color: #666; font-size: 14px;">正在加载聊天服务...</p>
+      </div>
+      <iframe
+        id="chat-iframe"
+        data-src="https://rack.941014.xyz/#/chat"
+        style="flex: 1; border: none; display: none;"
+        onload="this.style.display='block'; document.getElementById('chat-loading').style.display='none';"
+      ></iframe>
+    </div>
+    
+    <!-- 最小化聊天按钮 -->
+    <div
+      id="minimized-chat"
+      style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: #0071c2;
+        border-radius: 50%;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 1000;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transform-origin: center;
+        animation: pulse 2s infinite;
+      "
+    >
+      <i class="fas fa-comment" style="color: white; font-size: 24px;"></i>
+    </div>
+
+    <script src="../js/main.js"></script>
+
+    <script>
+      // 检查用户是否已登录
+      document.addEventListener('DOMContentLoaded', function() {
+        const loginEmail = localStorage.getItem('loginEmail');
+        const userInfo = document.getElementById('userInfo');
+        const authButtons = document.getElementById('authButtons');
+        const userEmail = document.getElementById('userEmail');
+        const logoutBtn = document.getElementById('logoutBtn');
+        
+        if (loginEmail) {
+          // 显示用户信息
+          userInfo.style.display = 'block';
+          authButtons.style.display = 'none';
+          userEmail.textContent = loginEmail;
+          
+          // 添加退出登录功能
+          logoutBtn.addEventListener('click', function() {
+            localStorage.removeItem('loginEmail');
+            userInfo.style.display = 'none';
+            authButtons.style.display = 'block';
+          });
+        } else {
+          // 显示登录/注册按钮
+          userInfo.style.display = 'none';
+          authButtons.style.display = 'block';
+        }
+        
+        // 聊天窗口相关功能
+        const floatingChat = document.getElementById('floating-chat');
+        const minimizedChat = document.getElementById('minimized-chat');
+        const chatHeader = document.getElementById('chat-header');
+        const closeChat = document.getElementById('close-chat');
+        const minimizeBtn = document.getElementById('minimize-chat');
+        const chatIframe = document.getElementById('chat-iframe');
+        let isMinimized = false;
+        let lastScrollTop = 0;
+        
+        // 添加一个标志，记录是否聊天窗口处于活跃状态（用户聚焦在输入框中）
+        let isChatActive = false;
+        
+        // 计时器相关变量
+        let topStayTimer = null;
+        let idleTimer = null;
+        
+        // 添加一个标志，记录是否是因为顶端停留而缩小的
+        let isMinimizedByTopStay = false;
+        
+        // 拖拽相关变量
+        let isDragging = false;
+        let offsetX, offsetY;
+        
+        // 检查聊天窗口是否活跃（用户正在输入）
+        function checkChatActive() {
+            // 检查iframe是否加载完成且显示
+            if (chatIframe && chatIframe.style.display !== 'none') {
+                try {
+                    // 尝试获取iframe中的活跃元素
+                    return document.activeElement === chatIframe;
+                } catch (e) {
+                    // 如果访问iframe内容出错，默认为false
+                    return false;
+                }
+            }
+            return false;
+        }
+        
+        // 触摸屏支持
+        chatHeader.addEventListener('touchstart', function(e) {
+          // 如果触摸的是按钮，不开始拖动
+          if (e.target === closeChat || e.target === minimizeBtn || e.target.closest('#close-chat') || e.target.closest('#minimize-chat')) {
+            return;
+          }
+          
+          isDragging = true;
+          
+          // 计算触摸点在聊天窗口中的相对位置
+          const chatRect = floatingChat.getBoundingClientRect();
+          const touch = e.touches[0];
+          offsetX = touch.clientX - chatRect.left;
+          offsetY = touch.clientY - chatRect.top;
+          
+          // 添加临时样式
+          floatingChat.style.transition = 'none';
+          e.preventDefault();
+        });
+        
+        // 鼠标拖动支持
+        chatHeader.addEventListener('mousedown', function(e) {
+          // 如果点击的是按钮，不开始拖动
+          if (e.target === closeChat || e.target === minimizeBtn || e.target.closest('#close-chat') || e.target.closest('#minimize-chat')) {
+            return;
+          }
+          
+          isDragging = true;
+          
+          // 计算鼠标在聊天窗口中的相对位置
+          const chatRect = floatingChat.getBoundingClientRect();
+          offsetX = e.clientX - chatRect.left;
+          offsetY = e.clientY - chatRect.top;
+          
+          // 添加临时样式
+          floatingChat.style.transition = 'none';
+          document.body.style.userSelect = 'none';
+          
+          e.preventDefault();
+        });
+        
+        document.addEventListener('touchmove', function(e) {
+          if (!isDragging) return;
+          
+          const touch = e.touches[0];
+          
+          // 计算新位置 - 确保窗口不会超出屏幕
+          const newLeft = Math.max(0, Math.min(window.innerWidth - floatingChat.offsetWidth, touch.clientX - offsetX));
+          const newTop = Math.max(0, Math.min(window.innerHeight - floatingChat.offsetHeight, touch.clientY - offsetY));
+          
+          // 设置新位置
+          floatingChat.style.right = 'auto';
+          floatingChat.style.bottom = 'auto';
+          floatingChat.style.left = newLeft + 'px';
+          floatingChat.style.top = newTop + 'px';
+          
+          e.preventDefault();
+        });
+        
+        document.addEventListener('mousemove', function(e) {
+          if (!isDragging) return;
+          
+          // 计算新位置 - 确保窗口不会超出屏幕
+          const newLeft = Math.max(0, Math.min(window.innerWidth - floatingChat.offsetWidth, e.clientX - offsetX));
+          const newTop = Math.max(0, Math.min(window.innerHeight - floatingChat.offsetHeight, e.clientY - offsetY));
+          
+          // 设置新位置
+          floatingChat.style.right = 'auto';
+          floatingChat.style.bottom = 'auto';
+          floatingChat.style.left = newLeft + 'px';
+          floatingChat.style.top = newTop + 'px';
+        });
+        
+        document.addEventListener('touchend', function() {
+          if (isDragging) {
+            isDragging = false;
+            floatingChat.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+          }
+        });
+        
+        document.addEventListener('mouseup', function() {
+          if (isDragging) {
+            isDragging = false;
+            floatingChat.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            document.body.style.userSelect = '';
+          }
+        });
+        
+        // 调整窗口大小时保持聊天窗口在可视区域内
+        window.addEventListener('resize', function() {
+          if (!isMinimized) {
+            const chatRect = floatingChat.getBoundingClientRect();
+            
+            // 如果窗口超出屏幕，重新调整位置
+            if (chatRect.right > window.innerWidth) {
+              floatingChat.style.left = (window.innerWidth - floatingChat.offsetWidth - 20) + 'px';
+            }
+            
+            if (chatRect.bottom > window.innerHeight) {
+              floatingChat.style.top = (window.innerHeight - floatingChat.offsetHeight - 20) + 'px';
+            }
+          }
+        });
+        
+        // 初始化状态
+        function initChatState() {
+          // 页面加载时，如果滚动位置超过100px，则默认为最小化状态
+          if (window.pageYOffset > 100) {
+            // 初始化时，设置为非顶端停留导致的最小化
+            isMinimizedByTopStay = false;
+            minimizeChat();
+          } else {
+            // 页面加载时在顶部，启动顶端停留计时
+            maximizeChat();
+            startTopStayTimer();
+          }
+          
+          // 添加iframe延迟加载
+          setTimeout(function() {
+            const chatIframe = document.getElementById('chat-iframe');
+            if (chatIframe && chatIframe.getAttribute('data-src')) {
+              chatIframe.src = chatIframe.getAttribute('data-src');
+            }
+          }, 10); // 延迟10毫秒加载聊天窗口内容
+        }
+        
+        // 添加聊天窗口焦点监听
+        document.addEventListener('focusin', function(e) {
+            if (e.target === chatIframe) {
+                isChatActive = true;
+            }
+        });
+        
+        document.addEventListener('focusout', function(e) {
+            if (e.target === chatIframe) {
+                isChatActive = false;
+            }
+        });
+        
+        // 监听页面可见性变化，当用户切换回页面时重置标志
+        document.addEventListener('visibilitychange', function() {
+          if (!document.hidden && window.pageYOffset >= 100) {
+            // 用户回到页面且不在顶部，重置标志
+            isMinimizedByTopStay = false;
+          }
+        });
+        
+        // 关闭聊天窗口
+        closeChat.addEventListener('click', function(e) {
+          e.stopPropagation();
+          floatingChat.style.transform = 'scale(0.5)';
+          floatingChat.style.opacity = '0';
+          minimizedChat.style.transform = 'scale(0.5)';
+          minimizedChat.style.opacity = '0';
+          
+          setTimeout(() => {
+            floatingChat.style.display = 'none';
+            minimizedChat.style.display = 'none';
+          }, 300);
+        });
+        
+        // 监听滚动事件
+        window.addEventListener('scroll', function() {
+          // 如果聊天窗口处于活跃状态，不处理滚动事件
+          if (isChatActive || checkChatActive()) {
+            return;
+          }
+          
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          
+          // 重置页面不动计时器
+          resetIdleTimer();
+          
+          // 向下滚动时最小化
+          if (scrollTop > lastScrollTop && !isMinimized && scrollTop > 100) {
+            // 用户手动滚动导致的最小化，不是因为顶端停留
+            isMinimizedByTopStay = false;
+            minimizeChat();
+            clearTimeout(topStayTimer); // 清除顶端停留计时器
+          } 
+          // 向上滚动到接近顶部时，如果是最小化状态，则展开
+          else if (scrollTop < lastScrollTop && isMinimized && scrollTop < 100) {
+            // 用户滚动回顶部，重置标志
+            isMinimizedByTopStay = false;
+            maximizeChat();
+            // 开始顶端停留计时
+            startTopStayTimer();
+          }
+          // 在页面顶端时，启动停留计时器
+          else if (scrollTop < 100 && !isMinimized) {
+            startTopStayTimer();
+          }
+          // 如果用户离开顶部区域，重置标志
+          else if (scrollTop >= 100) {
+            isMinimizedByTopStay = false;
+          }
+          
+          lastScrollTop = scrollTop;
+        });
+        
+        // 最小化按钮点击事件
+        minimizeBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          // 用户手动点击最小化，不是因为顶端停留
+          isMinimizedByTopStay = false;
+          minimizeChat();
+        });
+        
+        // 点击最小化图标打开聊天窗口
+        minimizedChat.addEventListener('click', function() {
+          // 用户手动点击打开，重置标志
+          isMinimizedByTopStay = false;
+          maximizeChat();
+        });
+        
+        // 另外添加一个监听函数，处理慢速滚动
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+          // 如果聊天窗口处于活跃状态，不处理滚动事件
+          if (isChatActive || checkChatActive()) {
+            return;
+          }
+          
+          clearTimeout(scrollTimeout);
+          
+          // 如果用户停止滚动0.5秒，且位置超过100px，则最小化聊天窗口
+          scrollTimeout = setTimeout(function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (!isMinimized && scrollTop > 100) {
+              // 用户慢速滚动导致的最小化，不是因为顶端停留
+              isMinimizedByTopStay = false;
+              minimizeChat();
+            }
+          }, 500);
+        });
+        
+        // 页面停留相关函数
+        function startTopStayTimer() {
+          // 如果聊天窗口处于活跃状态，不启动计时器
+          if (isChatActive || checkChatActive()) {
+            return;
+          }
+          
+          // 清除现有的计时器
+          clearTimeout(topStayTimer);
+          
+          // 设置新的计时器：如果在顶部停留3秒，则缩小聊天窗口
+          topStayTimer = setTimeout(function() {
+            // 再次检查聊天是否活跃，如果活跃则不最小化
+            if (!isMinimized && window.pageYOffset < 100 && !isChatActive && !checkChatActive()) {
+              // 设置标志，表示是因为顶端停留而缩小的
+              isMinimizedByTopStay = true;
+              minimizeChat();
+            }
+          }, 3000); // 3秒
+        }
+        
+        function resetIdleTimer() {
+          // 如果聊天窗口处于活跃状态，不重置不动计时器
+          if (isChatActive || checkChatActive()) {
+            return;
+          }
+          
+          // 清除现有的不动计时器
+          clearTimeout(idleTimer);
+          
+          // 设置新的计时器：如果页面不动5秒，且不是因为顶端停留而缩小的，则放大聊天窗口
+          idleTimer = setTimeout(function() {
+            // 再次检查聊天是否活跃
+            if (isMinimized && !isMinimizedByTopStay && !isChatActive && !checkChatActive()) {
+              maximizeChat();
+            }
+          }, 4000); // 4秒
+        }
+        
+        // 添加鼠标移动和触摸移动事件来重置不动计时器
+        document.addEventListener('mousemove', function() {
+          // 只有当聊天窗口不活跃时才重置计时器
+          if (!isChatActive && !checkChatActive()) {
+            resetIdleTimer();
+          }
+        });
+        
+        document.addEventListener('touchmove', function() {
+          // 只有当聊天窗口不活跃时才重置计时器
+          if (!isChatActive && !checkChatActive()) {
+            resetIdleTimer();
+          }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+          // 检查是否聊天窗口活跃
+          isChatActive = checkChatActive();
+          
+          // 只有当聊天窗口不活跃时才重置计时器
+          if (!isChatActive) {
+            resetIdleTimer();
+          }
+        });
+        
+        function minimizeChat() {
+          if (!isMinimized) {
+            // 清除顶部停留计时器
+            clearTimeout(topStayTimer);
+            
+            floatingChat.style.transform = 'scale(0.5)';
+            floatingChat.style.opacity = '0';
+            
+            setTimeout(() => {
+              floatingChat.style.display = 'none';
+              minimizedChat.style.display = 'flex';
+              minimizedChat.style.opacity = '0';
+              minimizedChat.style.transform = 'scale(0.5)';
+              
+              setTimeout(() => {
+                minimizedChat.style.opacity = '1';
+                minimizedChat.style.transform = 'scale(1)';
+              }, 10);
+            }, 200);
+            
+            isMinimized = true;
+            
+            // 如果不是因为顶端停留而最小化，确保重置标志
+            // 注意：此处不要重置 isMinimizedByTopStay，让调用者控制其值
+          }
+        }
+        
+        function maximizeChat() {
+          if (isMinimized) {
+            // 重置计时器，以便在顶部停留时开始计时
+            if (window.pageYOffset < 100) {
+              startTopStayTimer();
+            }
+            
+            minimizedChat.style.transform = 'scale(0.5)';
+            minimizedChat.style.opacity = '0';
+            
+            setTimeout(() => {
+              minimizedChat.style.display = 'none';
+              floatingChat.style.display = 'flex';
+              floatingChat.style.opacity = '0';
+              floatingChat.style.transform = 'scale(0.5)';
+              
+              // 确保iframe已经加载
+              const chatIframe = document.getElementById('chat-iframe');
+              if (chatIframe && !chatIframe.src && chatIframe.getAttribute('data-src')) {
+                chatIframe.src = chatIframe.getAttribute('data-src');
+              }
+              
+              setTimeout(() => {
+                floatingChat.style.opacity = '1';
+                floatingChat.style.transform = 'scale(1)';
+              }, 10);
+            }, 200);
+            
+            isMinimized = false;
+            
+            // 注意：此处不要重置 isMinimizedByTopStay，让调用者控制其值
+          }
+        }
+        
+        // 初始化不动计时器
+        resetIdleTimer();
+        
+        // 初始化聊天窗口状态
+        initChatState();
+      });
+    </script>
+  </body>
+</html>

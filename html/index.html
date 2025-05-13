@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>元莱.cn - 全球领先的在线酒店预订平台</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* 内联样式以确保应用区域显示 */
+      .download-app {
+        background-color: #e1f5fe !important;
+        padding: 60px 0 !important;
+        margin: 40px 0 !important;
+        border-top: 1px solid #ddd !important;
+        border-bottom: 1px solid #ddd !important;
+      }
+      .app-title {
+        color: #0071c2 !important;
+        font-size: 28px !important;
+        font-weight: bold !important;
+        margin-bottom: 15px !important;
+      }
+      .app-desc {
+        color: #333 !important;
+        font-size: 16px !important;
+        margin-bottom: 25px !important;
+      }
+      .app-store-link {
+        display: inline-block !important;
+        padding: 12px 25px !important;
+        border-radius: 6px !important;
+        font-weight: bold !important;
+        color: white !important;
+        text-align: center !important;
+        margin-right: 10px !important;
+        margin-bottom: 10px !important;
+      }
+      .app-store-btn {
+        background-color: #0071c2 !important;
+      }
+      .google-play-btn {
+        background-color: #00a65a !important;
+      }
+      .app-mockup-text {
+        background-color: #f0f0f0 !important;
+        border: 2px dashed #ccc !important;
+        padding: 80px 30px !important;
+        border-radius: 20px !important;
+        text-align: center !important;
+        color: #777 !important;
+        font-size: 18px !important;
+        max-width: 300px !important;
+        margin: 0 auto !important;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0 5px 15px rgba(0,113,194,0.4);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <div class="logo">
+          <a href="index.html">
+            <img src="../images/logo.png" alt="Name.cn" class="logo-img" />
+          </a>
+        </div>
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li class="nav-item"><a href="#" class="nav-link">住宿</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">机票</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">租车</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">景点门票</a></li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">机场出租车</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="user-controls">
+          <div class="language-selector">
+            <span>CNY</span>
+            <i class="fas fa-globe"></i>
+          </div>
+          <div id="userInfo" style="display: none;">
+            <span style="color: white; margin-right: 10px;">欢迎，<span id="userEmail"></span></span>
+            <button id="logoutBtn" style="background: none; border: 1px solid white; color: white; padding: 8px 12px; border-radius: 4px; cursor: pointer;">退出</button>
+          </div>
+          <div id="authButtons">
+          <a href="注册页面.html" class="register-btn">注册</a>
+          <a href="登录页面.html" class="login-btn">登录</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" style="background-color: rgb(167, 215, 243)">
+        <div class="hero-container">
+          <h1 class="hero-title">元莱 - 探索全球住宿 - 酒店、民宿和更多</h1>
+          <p class="hero-subtitle">
+            从酒店到民宿和度假屋，寻找您下一次旅行的理想住宿
+          </p>
+
+          <div class="search-box" >
+            <form action="#" method="get" class="search-form">
+              <div class="form-group destination">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="您想去哪里？" required />
+              </div>
+              <div class="form-group dates">
+                <i class="far fa-calendar-alt"></i>
+                <input type="text" placeholder="入住日期 — 退房日期" required />
+              </div>
+              <div class="form-group guests">
+                <i class="fas fa-user-friends"></i>
+                <input
+                  type="text"
+                  placeholder="2位成人 · 0位儿童 · 1间客房"
+                  required
+                />
+              </div>
+              <button type="submit" class="search-btn">搜索</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="offers">
+        <div class="container">
+          <h2 class="section-title">特别优惠</h2>
+          <div class="offers-grid">
+            <div class="offer-card">
+              <img
+                src="https://ac-a.static.booking.cn/xdata/images/hotel/square240/618788206.jpg?k=a302edc36fd29304c797a1d56cd9e11fd15c1251d4070a9be83ed35105b941ca&o="
+                alt="特惠酒店"
+                class="offer-img"
+              />
+              <div class="offer-content">
+                <h3 class="offer-title">酒店限时特惠</h3>
+                <p class="offer-desc">预订精选酒店，享受高达15%的折扣</p>
+                <a href="#" class="offer-link">立即查看</a>
+              </div>
+            </div>
+            <div class="offer-card">
+              <img
+                src="https://ac-a.static.booking.cn/xdata/images/hotel/square600/187855604.webp?k=0abbcd2115938850aa3372f4e7bf847f2aeb9579d674ec40ff273230a840eb9d&o="
+                alt="民宿体验"
+                class="offer-img"
+              />
+              <div class="offer-content">
+                <h3 class="offer-title">独特民宿体验</h3>
+                <p class="offer-desc">探索当地生活，享受别样住宿体验</p>
+                <a href="#" class="offer-link">发现更多</a>
+              </div>
+            </div>
+            <div class="offer-card">
+              <img
+                src="https://ac-a.static.booking.cn/xdata/images/hotel/square600/579099936.webp?k=e04cc7f7fe864ce09b7d7d978dbb7db3e558038a2151eb7c4c11e895bafbd8c0&o="
+                alt="长住优惠"
+                class="offer-img"
+              />
+              <div class="offer-content">
+                <h3 class="offer-title">长住特别优惠</h3>
+                <p class="offer-desc">连住7晚以上，享受额外优惠</p>
+                <a href="#" class="offer-link">查看详情</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="popular-destinations">
+        <div class="container">
+          <h2 class="section-title">热门目的地</h2>
+          <div class="destinations-grid">
+            <div class="destination-card">
+              <img
+                src="https://p3-search.byteimg.com/obj/labis/63560f0ea5961d8e954991c05b95c2d8"
+                alt="北京"
+                class="destination-img"
+              />
+              <div class="destination-content">
+                <h3 class="destination-title">北京</h3>
+                <p class="destination-desc">2,456 家住宿</p>
+              </div>
+            </div>
+            <div class="destination-card">
+              <img src="https://img1.baidu.com/it/u=1224667772,1366084778&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=1422" alt="上海" class="destination-img" />
+              <div class="destination-content">
+                <h3 class="destination-title">上海</h3>
+                <p class="destination-desc">3,128 家住宿</p>
+              </div>
+            </div>
+            <div class="destination-card">
+              <img
+                src="https://p3-sdbk2-media.byteimg.com/tos-cn-i-xv4ileqgde/1c9fa5d2794e4b498011fa2090e19e5d~tplv-xv4ileqgde-image.image"
+                alt="广州"
+                class="destination-img"
+              />
+              <div class="destination-content">
+                <h3 class="destination-title">广州</h3>
+                <p class="destination-desc">1,879 家住宿</p>
+              </div>
+            </div>
+            <div class="destination-card">
+              <img
+                src="https://p3-search.byteimg.com/img/labis/49260b39e8833b50100dd2b6e1535ebb~480x480.JPEG"
+                alt="成都"
+                class="destination-img"
+              />
+              <div class="destination-content">
+                <h3 class="destination-title">成都</h3>
+                <p class="destination-desc">1,532 家住宿</p>
+              </div>
+            </div>
+            <div class="destination-card">
+              <img
+                src="https://p3-search.byteimg.com/obj/labis/2c9efa127b31b39224865cf0de5df20d"
+                alt="厦门"
+                class="destination-img"
+              />
+              <div class="destination-content">
+                <h3 class="destination-title">厦门</h3>
+                <p class="destination-desc">987 家住宿</p>
+              </div>
+            </div>
+            <div class="destination-card">
+              <img
+                src="https://p3-search.byteimg.com/obj/labis/e3733495146aec1722bfc45857d4befd"
+                alt="杭州"
+                class="destination-img"
+              />
+              <div class="destination-content">
+                <h3 class="destination-title">杭州</h3>
+                <p class="destination-desc">1,423 家住宿</p>
+              </div>
+            </div>
+            <div class="destination-card">
+              <img
+                src="https://ac-a.static.booking.cn/xdata/images/hotel/square240/556835151.webp?k=debec30a52ac8e8edb4cd9e538d2d12f0dcf12d7ffa4c706545a16c2c381c7f5&o="
+                alt="三亚"
+                class="destination-img"
+              />
+              <div class="destination-content">
+                <h3 class="destination-title">三亚</h3>
+                <p class="destination-desc">851 家住宿</p>
+              </div>
+            </div>
+            <div class="destination-card">
+              <img
+                src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage109.360doc.com%2FDownloadImg%2F2024%2F11%2F2014%2F291053445_8_20241120024557250.jpeg&refer=http%3A%2F%2Fimage109.360doc.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1748104001&t=7da018dc56e00133d536f3e975c5dbd6"
+                alt="丽江"
+                class="destination-img"
+              />
+              <div class="destination-content">
+                <h3 class="destination-title">丽江</h3>
+                <p class="destination-desc">765 家住宿</p>
+              </div>
+            </div>
+            <div class="destination-card">
+              <img
+                src="../images/imagesxian.jpg"
+                alt="西安"
+                class="destination-img"
+              />
+              <div class="destination-content">
+                <h3 class="destination-title">西安</h3>
+                <p class="destination-desc">1,209 家住宿</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="luxury-destinations">
+        <div class="container">
+          <h2 class="section-title">高端精选目的地</h2>
+          <p class="section-subtitle">探索世界上最奢华的度假体验</p>
+          <div class="luxury-grid">
+            <div class="luxury-card">
+              <img
+                src="https://ac-a.static.booking.cn/xdata/images/hotel/square240/586738291.webp?k=ea6ac746c984adcda43fd99d7406bc177d65f8047e62a564a29b59f3fa4f7e7f&o="
+                alt="马尔代夫"
+                class="luxury-img"
+              />
+              <div class="luxury-content">
+                <h3 class="luxury-title">马尔代夫</h3>
+                <p class="luxury-desc">海岛天堂，水上别墅</p>
+                <a href="#" class="luxury-btn">探索奢华住宿</a>
+              </div>
+            </div>
+            <div class="luxury-card">
+              <img
+                src="https://cf.bstatic.com/xdata/images/hotel/max300/551292350.jpg?k=434a3bdd594f1ddfe719b62d38a9d8376c1c295e2eb40e8750e2b6de97fb2aa3&o="
+                alt="巴厘岛"
+                class="luxury-img"
+              />
+              <div class="luxury-content">
+                <h3 class="luxury-title">巴厘岛</h3>
+                <p class="luxury-desc">热带风情，私人泳池别墅</p>
+                <a href="#" class="luxury-btn">探索奢华住宿</a>
+              </div>
+            </div>
+            <div class="luxury-card">
+              <img
+                src="https://ac-a.static.booking.cn/xdata/images/hotel/square240/251087149.webp?k=8c896cc6b1b6955688aa992c5ce9cef92d6afc012e81e8d4afd332c94cc6952e&o="
+                alt="圣托里尼"
+                class="luxury-img"
+              />
+              <div class="luxury-content">
+                <h3 class="luxury-title">圣托里尼</h3>
+                <p class="luxury-desc">爱琴海明珠，悬崖海景套房</p>
+                <a href="#" class="luxury-btn">探索奢华住宿</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="property-types">
+        <div class="container">
+          <h2 class="section-title">按住宿类型浏览</h2>
+          <div class="property-types-grid">
+            <div class="property-type-card">
+              <img
+                src="../images/hotel.png"
+                alt="酒店"
+                class="property-type-img"
+              />
+              <h3 class="property-type-title">酒店</h3>
+              <p class="property-type-count">892,543 家酒店</p>
+            </div>
+            <div class="property-type-card">
+              <img
+                src="../images/partment.png"
+                alt="公寓"
+                class="property-type-img"
+              />
+              <h3 class="property-type-title">公寓</h3>
+              <p class="property-type-count">912,308 家公寓</p>
+            </div>
+            <div class="property-type-card">
+              <img
+                src="https://ac-a.static.booking.cn/xdata/images/hotel/square240/584748112.webp?k=2b05830be1ef1d0c0ebc6fc8368511d7326e5ebdc71889ca7ac5624dccea4370&o="
+                alt="度假村"
+                class="property-type-img"
+              />
+              <h3 class="property-type-title">度假村</h3>
+              <p class="property-type-count">18,434 家度假村</p>
+            </div>
+            <div class="property-type-card">
+              <img
+                src="https://ac-a.static.booking.cn/xdata/images/hotel/square240/584457054.webp?k=82aa61ee69ff03856ead48436e0263eb170d6ba20f73a3691f00a2760550bee9&o="
+                alt="别墅"
+                class="property-type-img"
+              />
+              <h3 class="property-type-title">别墅</h3>
+              <p class="property-type-count">484,211 栋别墅</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="download-app">
+        <div class="container">
+          <div class="app-content" style="align-items: flex-start">
+            <div
+              class="app-text"
+              style="opacity: 1; transform: none; animation: none"
+            >
+              <h2
+                class="app-title"
+                style="
+                  display: block;
+                  font-size: 32px;
+                  margin-bottom: 20px;
+                  color: #333;
+                  font-weight: bold;
+                "
+              >
+                打开 元莱 微信小程序
+              </h2>
+              <p
+                class="app-desc"
+                style="
+                  display: block;
+                  font-size: 18px;
+                  margin-bottom: 30px;
+                  color: #555;
+                "
+              >
+                随时随地管理您的预订，发现专属移动端优惠
+              </p>
+              <div
+                class="qr-code-container"
+                style="margin-bottom: 30px; text-align: center"
+              >
+                <img
+                  src="../images/二维码.JPG"
+                  alt="元莱微信小程序二维码"
+                  style="width: 180px; height: 180px; border-radius: 10px"
+                />
+                <p style="margin-top: 15px; font-size: 14px; color: #666">
+                  扫描二维码，立即体验
+                </p>
+              </div>
+            </div>
+            <div
+              class="app-image"
+              style="
+                opacity: 1;
+                transform: none;
+                animation: none;
+                display: block;
+                flex: 1 1 400px;
+              "
+            >
+              <div
+                class="app-screenshots"
+                style="
+                  display: flex;
+                  justify-content: center;
+                  gap: 20px;
+                  flex-wrap: wrap;
+                
+                "
+              >
+                <img
+                  src="../images/hero.png"
+                  alt="小程序截图"
+                  style="
+                    width: 280px;
+                    height: 500px;
+                    border-radius: 25px;
+                    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+                    overflow: hidden;
+                  "
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="newsletter">
+            <h3 class="newsletter-title">立即订阅，获取独家优惠</h3>
+            <form action="#" class="newsletter-form">
+              <input type="email" placeholder="输入您的电子邮箱" required />
+              <button type="submit" class="newsletter-btn">订阅</button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4 class="footer-heading">客户服务</h4>
+            <ul class="footer-list">
+              <li><a href="#">帮助中心</a></li>
+              <li><a href="#">常见问题</a></li>
+              <li><a href="#">联系我们</a></li>
+              <li><a href="#">合作伙伴帮助</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4 class="footer-heading">关于我们</h4>
+            <ul class="footer-list">
+              <li><a href="#">关于 元莱.cn</a></li>
+              <li><a href="#">用户协议</a></li>
+              <li><a href="#">隐私政策</a></li>
+              <li><a href="#">企业信息</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4 class="footer-heading">目的地</h4>
+            <ul class="footer-list">
+              <li><a href="#">国家</a></li>
+              <li><a href="#">城市</a></li>
+              <li><a href="#">地区</a></li>
+              <li><a href="#">机场</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4 class="footer-heading">合作伙伴</h4>
+            <ul class="footer-list">
+              <li><a href="#">加盟 元莱.cn</a></li>
+              <li><a href="#">营销推广</a></li>
+              <li><a href="#">旅游代理</a></li>
+              <li><a href="#">酒店管理系统</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p class="copyright">© 1996–2025 yuAnlaI.com™. 版权所有</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-weibo"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+            <a href="#" class="social-link"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Floating Chat Window -->
+    <div
+      id="floating-chat"
+      style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 25%;
+        min-width: 200px;
+        max-width: 400px;
+        height: 44%;
+        min-height: 300px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transform-origin: bottom right;
+      "
+    >
+      <div
+        id="chat-header"
+        style="
+          background: #0071c2;
+          color: white;
+          padding: 10px 15px;
+          font-weight: bold;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: move;
+          user-select: none;
+          -webkit-user-select: none;
+          border-radius: 10px 10px 0 0;
+        "
+      >
+        <span>AI客服</span>
+        <div style="display: flex; align-items: center;">
+          <button
+            id="minimize-chat"
+            style="
+              background: none;
+              border: none;
+              color: white;
+              font-size: 18px;
+              margin-right: 10px;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 24px;
+              height: 24px;
+              border-radius: 50%;
+              transition: background-color 0.2s;
+            "
+            title="最小化"
+            onmouseover="this.style.backgroundColor='rgba(255,255,255,0.2)'"
+            onmouseout="this.style.backgroundColor='transparent'"
+          >
+            <i class="fas fa-minus"></i>
+          </button>
+          <button
+            id="close-chat"
+            style="
+              background: none;
+              border: none;
+              color: white;
+              font-size: 18px;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 24px;
+              height: 24px;
+              border-radius: 50%;
+              transition: background-color 0.2s;
+            "
+            title="关闭"
+            onmouseover="this.style.backgroundColor='rgba(255,255,255,0.2)'"
+            onmouseout="this.style.backgroundColor='transparent'"
+          >
+            
+          </button>
+        </div>
+      </div>
+      <div id="chat-loading" style="flex: 1; display: flex; justify-content: center; align-items: center; flex-direction: column; background: #f5f9ff;">
+        <div style="width: 40px; height: 40px; border: 3px solid #eee; border-top: 3px solid #0071c2; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        <p style="margin-top: 15px; color: #666; font-size: 14px;">正在加载聊天服务...</p>
+      </div>
+      <iframe
+        id="chat-iframe"
+        data-src="https://rack.941014.xyz/#/chat"
+        style="flex: 1; border: none; display: none;"
+        onload="this.style.display='block'; document.getElementById('chat-loading').style.display='none';"
+      ></iframe>
+    </div>
+    
+    <!-- 最小化聊天按钮 -->
+    <div
+      id="minimized-chat"
+      style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: #0071c2;
+        border-radius: 50%;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 1000;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transform-origin: center;
+        animation: pulse 2s infinite;
+      "
+    >
+      <i class="fas fa-comment" style="color: white; font-size: 24px;"></i>
+    </div>
+
+    <script src="../js/main.js"></script>
+
+    <script>
+      // 检查用户是否已登录
+      document.addEventListener('DOMContentLoaded', function() {
+        const loginEmail = localStorage.getItem('loginEmail');
+        const userInfo = document.getElementById('userInfo');
+        const authButtons = document.getElementById('authButtons');
+        const userEmail = document.getElementById('userEmail');
+        const logoutBtn = document.getElementById('logoutBtn');
+        
+        if (loginEmail) {
+          // 显示用户信息
+          userInfo.style.display = 'block';
+          authButtons.style.display = 'none';
+          userEmail.textContent = loginEmail;
+          
+          // 添加退出登录功能
+          logoutBtn.addEventListener('click', function() {
+            localStorage.removeItem('loginEmail');
+            userInfo.style.display = 'none';
+            authButtons.style.display = 'block';
+          });
+        } else {
+          // 显示登录/注册按钮
+          userInfo.style.display = 'none';
+          authButtons.style.display = 'block';
+        }
+        
+        // 聊天窗口相关功能
+        const floatingChat = document.getElementById('floating-chat');
+        const minimizedChat = document.getElementById('minimized-chat');
+        const chatHeader = document.getElementById('chat-header');
+        const closeChat = document.getElementById('close-chat');
+        const minimizeBtn = document.getElementById('minimize-chat');
+        const chatIframe = document.getElementById('chat-iframe');
+        let isMinimized = false;
+        let lastScrollTop = 0;
+        
+        // 添加一个标志，记录是否聊天窗口处于活跃状态（用户聚焦在输入框中）
+        let isChatActive = false;
+        
+        // 计时器相关变量
+        let topStayTimer = null;
+        let idleTimer = null;
+        
+        // 添加一个标志，记录是否是因为顶端停留而缩小的
+        let isMinimizedByTopStay = false;
+        
+        // 拖拽相关变量
+        let isDragging = false;
+        let offsetX, offsetY;
+        
+        // 检查聊天窗口是否活跃（用户正在输入）
+        function checkChatActive() {
+            // 检查iframe是否加载完成且显示
+            if (chatIframe && chatIframe.style.display !== 'none') {
+                try {
+                    // 尝试获取iframe中的活跃元素
+                    return document.activeElement === chatIframe;
+                } catch (e) {
+                    // 如果访问iframe内容出错，默认为false
+                    return false;
+                }
+            }
+            return false;
+        }
+        
+        // 触摸屏支持
+        chatHeader.addEventListener('touchstart', function(e) {
+          // 如果触摸的是按钮，不开始拖动
+          if (e.target === closeChat || e.target === minimizeBtn || e.target.closest('#close-chat') || e.target.closest('#minimize-chat')) {
+            return;
+          }
+          
+          isDragging = true;
+          
+          // 计算触摸点在聊天窗口中的相对位置
+          const chatRect = floatingChat.getBoundingClientRect();
+          const touch = e.touches[0];
+          offsetX = touch.clientX - chatRect.left;
+          offsetY = touch.clientY - chatRect.top;
+          
+          // 添加临时样式
+          floatingChat.style.transition = 'none';
+          e.preventDefault();
+        });
+        
+        // 鼠标拖动支持
+        chatHeader.addEventListener('mousedown', function(e) {
+          // 如果点击的是按钮，不开始拖动
+          if (e.target === closeChat || e.target === minimizeBtn || e.target.closest('#close-chat') || e.target.closest('#minimize-chat')) {
+            return;
+          }
+          
+          isDragging = true;
+          
+          // 计算鼠标在聊天窗口中的相对位置
+          const chatRect = floatingChat.getBoundingClientRect();
+          offsetX = e.clientX - chatRect.left;
+          offsetY = e.clientY - chatRect.top;
+          
+          // 添加临时样式
+          floatingChat.style.transition = 'none';
+          document.body.style.userSelect = 'none';
+          
+          e.preventDefault();
+        });
+        
+        document.addEventListener('touchmove', function(e) {
+          if (!isDragging) return;
+          
+          const touch = e.touches[0];
+          
+          // 计算新位置 - 确保窗口不会超出屏幕
+          const newLeft = Math.max(0, Math.min(window.innerWidth - floatingChat.offsetWidth, touch.clientX - offsetX));
+          const newTop = Math.max(0, Math.min(window.innerHeight - floatingChat.offsetHeight, touch.clientY - offsetY));
+          
+          // 设置新位置
+          floatingChat.style.right = 'auto';
+          floatingChat.style.bottom = 'auto';
+          floatingChat.style.left = newLeft + 'px';
+          floatingChat.style.top = newTop + 'px';
+          
+          e.preventDefault();
+        });
+        
+        document.addEventListener('mousemove', function(e) {
+          if (!isDragging) return;
+          
+          // 计算新位置 - 确保窗口不会超出屏幕
+          const newLeft = Math.max(0, Math.min(window.innerWidth - floatingChat.offsetWidth, e.clientX - offsetX));
+          const newTop = Math.max(0, Math.min(window.innerHeight - floatingChat.offsetHeight, e.clientY - offsetY));
+          
+          // 设置新位置
+          floatingChat.style.right = 'auto';
+          floatingChat.style.bottom = 'auto';
+          floatingChat.style.left = newLeft + 'px';
+          floatingChat.style.top = newTop + 'px';
+        });
+        
+        document.addEventListener('touchend', function() {
+          if (isDragging) {
+            isDragging = false;
+            floatingChat.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+          }
+        });
+        
+        document.addEventListener('mouseup', function() {
+          if (isDragging) {
+            isDragging = false;
+            floatingChat.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            document.body.style.userSelect = '';
+          }
+        });
+        
+        // 调整窗口大小时保持聊天窗口在可视区域内
+        window.addEventListener('resize', function() {
+          if (!isMinimized) {
+            const chatRect = floatingChat.getBoundingClientRect();
+            
+            // 如果窗口超出屏幕，重新调整位置
+            if (chatRect.right > window.innerWidth) {
+              floatingChat.style.left = (window.innerWidth - floatingChat.offsetWidth - 20) + 'px';
+            }
+            
+            if (chatRect.bottom > window.innerHeight) {
+              floatingChat.style.top = (window.innerHeight - floatingChat.offsetHeight - 20) + 'px';
+            }
+          }
+        });
+        
+        // 初始化状态
+        function initChatState() {
+          // 页面加载时，如果滚动位置超过100px，则默认为最小化状态
+          if (window.pageYOffset > 100) {
+            // 初始化时，设置为非顶端停留导致的最小化
+            isMinimizedByTopStay = false;
+            minimizeChat();
+          } else {
+            // 页面加载时在顶部，启动顶端停留计时
+            maximizeChat();
+            startTopStayTimer();
+          }
+          
+          // 添加iframe延迟加载
+          setTimeout(function() {
+            const chatIframe = document.getElementById('chat-iframe');
+            if (chatIframe && chatIframe.getAttribute('data-src')) {
+              chatIframe.src = chatIframe.getAttribute('data-src');
+            }
+          }, 10); // 延迟10毫秒加载聊天窗口内容
+        }
+        
+        // 添加聊天窗口焦点监听
+        document.addEventListener('focusin', function(e) {
+            if (e.target === chatIframe) {
+                isChatActive = true;
+            }
+        });
+        
+        document.addEventListener('focusout', function(e) {
+            if (e.target === chatIframe) {
+                isChatActive = false;
+            }
+        });
+        
+        // 监听页面可见性变化，当用户切换回页面时重置标志
+        document.addEventListener('visibilitychange', function() {
+          if (!document.hidden && window.pageYOffset >= 100) {
+            // 用户回到页面且不在顶部，重置标志
+            isMinimizedByTopStay = false;
+          }
+        });
+        
+        // 关闭聊天窗口
+        closeChat.addEventListener('click', function(e) {
+          e.stopPropagation();
+          floatingChat.style.transform = 'scale(0.5)';
+          floatingChat.style.opacity = '0';
+          minimizedChat.style.transform = 'scale(0.5)';
+          minimizedChat.style.opacity = '0';
+          
+          setTimeout(() => {
+            floatingChat.style.display = 'none';
+            minimizedChat.style.display = 'none';
+          }, 300);
+        });
+        
+        // 监听滚动事件
+        window.addEventListener('scroll', function() {
+          // 如果聊天窗口处于活跃状态，不处理滚动事件
+          if (isChatActive || checkChatActive()) {
+            return;
+          }
+          
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          
+          // 重置页面不动计时器
+          resetIdleTimer();
+          
+          // 向下滚动时最小化
+          if (scrollTop > lastScrollTop && !isMinimized && scrollTop > 100) {
+            // 用户手动滚动导致的最小化，不是因为顶端停留
+            isMinimizedByTopStay = false;
+            minimizeChat();
+            clearTimeout(topStayTimer); // 清除顶端停留计时器
+          } 
+          // 向上滚动到接近顶部时，如果是最小化状态，则展开
+          else if (scrollTop < lastScrollTop && isMinimized && scrollTop < 100) {
+            // 用户滚动回顶部，重置标志
+            isMinimizedByTopStay = false;
+            maximizeChat();
+            // 开始顶端停留计时
+            startTopStayTimer();
+          }
+          // 在页面顶端时，启动停留计时器
+          else if (scrollTop < 100 && !isMinimized) {
+            startTopStayTimer();
+          }
+          // 如果用户离开顶部区域，重置标志
+          else if (scrollTop >= 100) {
+            isMinimizedByTopStay = false;
+          }
+          
+          lastScrollTop = scrollTop;
+        });
+        
+        // 最小化按钮点击事件
+        minimizeBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          // 用户手动点击最小化，不是因为顶端停留
+          isMinimizedByTopStay = false;
+          minimizeChat();
+        });
+        
+        // 点击最小化图标打开聊天窗口
+        minimizedChat.addEventListener('click', function() {
+          // 用户手动点击打开，重置标志
+          isMinimizedByTopStay = false;
+          maximizeChat();
+        });
+        
+        // 另外添加一个监听函数，处理慢速滚动
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+          // 如果聊天窗口处于活跃状态，不处理滚动事件
+          if (isChatActive || checkChatActive()) {
+            return;
+          }
+          
+          clearTimeout(scrollTimeout);
+          
+          // 如果用户停止滚动0.5秒，且位置超过100px，则最小化聊天窗口
+          scrollTimeout = setTimeout(function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (!isMinimized && scrollTop > 100) {
+              // 用户慢速滚动导致的最小化，不是因为顶端停留
+              isMinimizedByTopStay = false;
+              minimizeChat();
+            }
+          }, 500);
+        });
+        
+        // 页面停留相关函数
+        function startTopStayTimer() {
+          // 如果聊天窗口处于活跃状态，不启动计时器
+          if (isChatActive || checkChatActive()) {
+            return;
+          }
+          
+          // 清除现有的计时器
+          clearTimeout(topStayTimer);
+          
+          // 设置新的计时器：如果在顶部停留3秒，则缩小聊天窗口
+          topStayTimer = setTimeout(function() {
+            // 再次检查聊天是否活跃，如果活跃则不最小化
+            if (!isMinimized && window.pageYOffset < 100 && !isChatActive && !checkChatActive()) {
+              // 设置标志，表示是因为顶端停留而缩小的
+              isMinimizedByTopStay = true;
+              minimizeChat();
+            }
+          }, 3000); // 3秒
+        }
+        
+        function resetIdleTimer() {
+          // 如果聊天窗口处于活跃状态，不重置不动计时器
+          if (isChatActive || checkChatActive()) {
+            return;
+          }
+          
+          // 清除现有的不动计时器
+          clearTimeout(idleTimer);
+          
+          // 设置新的计时器：如果页面不动5秒，且不是因为顶端停留而缩小的，则放大聊天窗口
+          idleTimer = setTimeout(function() {
+            // 再次检查聊天是否活跃
+            if (isMinimized && !isMinimizedByTopStay && !isChatActive && !checkChatActive()) {
+              maximizeChat();
+            }
+          }, 4000); // 4秒
+        }
+        
+        // 添加鼠标移动和触摸移动事件来重置不动计时器
+        document.addEventListener('mousemove', function() {
+          // 只有当聊天窗口不活跃时才重置计时器
+          if (!isChatActive && !checkChatActive()) {
+            resetIdleTimer();
+          }
+        });
+        
+        document.addEventListener('touchmove', function() {
+          // 只有当聊天窗口不活跃时才重置计时器
+          if (!isChatActive && !checkChatActive()) {
+            resetIdleTimer();
+          }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+          // 检查是否聊天窗口活跃
+          isChatActive = checkChatActive();
+          
+          // 只有当聊天窗口不活跃时才重置计时器
+          if (!isChatActive) {
+            resetIdleTimer();
+          }
+        });
+        
+        function minimizeChat() {
+          if (!isMinimized) {
+            // 清除顶部停留计时器
+            clearTimeout(topStayTimer);
+            
+            floatingChat.style.transform = 'scale(0.5)';
+            floatingChat.style.opacity = '0';
+            
+            setTimeout(() => {
+              floatingChat.style.display = 'none';
+              minimizedChat.style.display = 'flex';
+              minimizedChat.style.opacity = '0';
+              minimizedChat.style.transform = 'scale(0.5)';
+              
+              setTimeout(() => {
+                minimizedChat.style.opacity = '1';
+                minimizedChat.style.transform = 'scale(1)';
+              }, 10);
+            }, 200);
+            
+            isMinimized = true;
+            
+            // 如果不是因为顶端停留而最小化，确保重置标志
+            // 注意：此处不要重置 isMinimizedByTopStay，让调用者控制其值
+          }
+        }
+        
+        function maximizeChat() {
+          if (isMinimized) {
+            // 重置计时器，以便在顶部停留时开始计时
+            if (window.pageYOffset < 100) {
+              startTopStayTimer();
+            }
+            
+            minimizedChat.style.transform = 'scale(0.5)';
+            minimizedChat.style.opacity = '0';
+            
+            setTimeout(() => {
+              minimizedChat.style.display = 'none';
+              floatingChat.style.display = 'flex';
+              floatingChat.style.opacity = '0';
+              floatingChat.style.transform = 'scale(0.5)';
+              
+              // 确保iframe已经加载
+              const chatIframe = document.getElementById('chat-iframe');
+              if (chatIframe && !chatIframe.src && chatIframe.getAttribute('data-src')) {
+                chatIframe.src = chatIframe.getAttribute('data-src');
+              }
+              
+              setTimeout(() => {
+                floatingChat.style.opacity = '1';
+                floatingChat.style.transform = 'scale(1)';
+              }, 10);
+            }, 200);
+            
+            isMinimized = false;
+            
+            // 注意：此处不要重置 isMinimizedByTopStay，让调用者控制其值
+          }
+        }
+        
+        // 初始化不动计时器
+        resetIdleTimer();
+        
+        // 初始化聊天窗口状态
+        initChatState();
+      });
+    </script>
+  </body>
+</html>
+
